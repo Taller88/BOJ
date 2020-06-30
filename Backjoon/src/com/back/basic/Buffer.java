@@ -1,33 +1,23 @@
 package com.back.basic;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
-
-public class Buffer {
-
-	public static void main(String[] args) {
-
-		try {
-			BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));//선언
-			
-			int cnt=Integer.parseInt(br.readLine());
-			for(int i=0; i<cnt; i++) {
-				String tmp=br.readLine();
-				StringTokenizer st = new StringTokenizer(tmp); //StringTokenizer인자값에 입력 문자열 넣음
-				int a = Integer.parseInt(st.nextToken()); //첫번째 호출
-				int b = Integer.parseInt(st.nextToken()); //두번째 호출
-				bw.write(a+b+"\n");
-			}
-			bw.close();//스트림을 닫음
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+import java.util.*;
+import java.io.*;
+ 
+// https://www.acmicpc.net/problem/15552
+ 
+class Main {
+    public static void main(String args[]) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        int TC = Integer.parseInt(br.readLine());
+        for(int i=0; i<TC; i++) {
+            st = new StringTokenizer(br.readLine());
+            int A = Integer.parseInt(st.nextToken());
+            int B = Integer.parseInt(st.nextToken());
+            int sum = A+B;
+ 
+            bw.write(sum + "\n");
+        }
+        bw.flush();
+    }
 }
