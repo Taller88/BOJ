@@ -8,10 +8,10 @@ public class Turrets {
 		for(int z=0; z<cnt; z++) {
 			int x1=sc.nextInt();
 			int y1=sc.nextInt();
-			int z1=sc.nextInt();
+			int r1=sc.nextInt();
 			int x2=sc.nextInt();
 			int y2=sc.nextInt();
-			int z2=sc.nextInt();
+			int r2=sc.nextInt();
 			
 			
 			
