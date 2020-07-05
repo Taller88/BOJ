@@ -23,33 +23,38 @@ public class Balance {
 		Scanner sc=new Scanner(System.in);
 		while(sc.hasNext()) {
 			String in=sc.nextLine();
-			Stack<Character> big=new Stack<>();
-			Stack<Character> small=new Stack<>();
+			if(in.equals(".")) {
+				break;
+			}
+			Stack<Character> stk=new Stack<>();
 			int i=0;
 			while(in.charAt(i)!='.') {
-				
-				if(in.charAt(i)=='(') {
-					small.push('(');
-				}else if(!small.isEmpty()&& small.peek()=='(' && in.charAt(i)==')') {
-					small.pop();
-				}else if(in.charAt(i)=='[') {
-					big.push('[');
-				}else if(!big.isEmpty() && big.peek()=='[' && in.charAt(i)==']') {
-					big.pop();
-				}else if(small.isEmpty() && in.charAt(i)==')') {
-					small.push(')');
-				}else if(big.isEmpty() && in.charAt(i)==']') {
-					small.push(']');
+				if(in.charAt(i)=='(' || in.charAt(i)=='[') {
+					stk.push(in.charAt(i));
+				}else if(!stk.isEmpty() && in.charAt(i)==')' && stk.peek()!='(') {
+					stk.push('*');
+					break;
+				}else if(!stk.isEmpty() &&in.charAt(i)==']' && stk.peek()!='[') {
+					stk.push('*');
+					break;
+				}else if(!stk.isEmpty() && (in.charAt(i)==')'&& stk.peek()=='(' ) ) {
+					stk.pop();
+				}else if(!stk.isEmpty() && (in.charAt(i)==']' && stk.peek()=='[') ) {
+					stk.pop();
+				}else {
+					stk.push('*');
+					break;
 				}
 				i++;
-			}
-			if(small.isEmpty() && big.isEmpty()) {
+			}//while
+			if(stk.isEmpty()) {
 				System.out.println("yes");
 			}else {
-				System.out.println("no");
+				System.out.println("no");	
 			}
-
-		}
+			
+		}//while
 	}
 
 }
+
