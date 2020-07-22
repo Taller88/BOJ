@@ -6,28 +6,41 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class SdokuSolution {
-	static int[]width= {1,2,3,4,5,6,7,8,9};
-	static int[]height= {1,2,3,4,5,6,7,8,9};
-	static int[]square= {1,2,3,4,5,6,7,8,9};
+	static class Dot{
+		int x;
+		int y;
+		public Dot(int x, int y) {
+			this.x=x;
+			this.y=y;
+		}
+	}
+	static int[][]result=new int[9][9];
+	static ArrayList<Dot> list=new ArrayList<>();
 	public static void main(String[] args) throws Exception{
 		StringBuilder sb=new StringBuilder();
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int[][]arr=new int[9][9];
+		
 		boolean[][]visited=new boolean[9][9];
 		for(int i=0; i<9; i++) {
 			st=new StringTokenizer(br.readLine());
 			for(int j=0; j<9; j++) {
-				arr[i][j]=Integer.parseInt(st.nextToken());
+				int tmp=Integer.parseInt(st.nextToken());
+				if(tmp==0) {
+					System.out.println("i: "+i +" j:"+j);
+					list.add(new Dot(i, j));
+				}
+				arr[i][j]=tmp;
 			}
 		}
 		
-		for(int i=0; i<9;i++) {
-			for(int j=0; j<9; j++) {
-				if(arr[i][j]==1) {
-					dfs(arr,i,j);
-				}
+		dfs(arr,0);
+		for(int i=0; i<result.length; i++) {
+			for(int j=0; j<result[0].length; j++) {
+				System.out.print(result[i][j]+" ");
 			}
+			System.out.println();
 		}
 		
 	}
@@ -59,7 +72,44 @@ public class SdokuSolution {
 		}
 		return true;
 	}
-	public static void dfs(int[][] arr, int i, int j) {
+	public static boolean checkZero(int[][] arr) {
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<arr[0].length; j++) {
+				if(arr[i][j]==0) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public static void dfs(int[][] arr, int idx) {
+		if(idx>=list.size()) {
+			return;
+		}
+		if(checkZero(arr)) {
+			
+			for(int i=0; i<arr.length; i++) {
+				for(int j=0; j<arr[0].length; j++) {
+					result[i][j]=arr[i][j];
+				}
+			}
+		}
+		
+				Dot t=list.get(idx);
+				int i=t.x;
+				int j=t.y;
+					for(int z=1;z<10; z++) {
+						if(checkBox(arr, i, j, z)&&checkWidth(arr, i, z) && checkHeight(arr, j, z)) {
+							System.out.println("x: "+i+ " y: "+j+" z: "+z);
+							
+							arr[i][j]=z;
+							dfs(arr, idx+1);
+							arr[i][j]=0;
+						}
+					}
+					
+			
+				
 		
 	}
 
