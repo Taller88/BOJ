@@ -3,13 +3,22 @@ import java.util.*;
 
 public class UpSnail {
 
-	    public static void main(String[]args){
+	  public static void main(String[]args){
 	        Scanner sc=new Scanner(System.in);
-	        int a=sc.nextInt();
-	        int b=sc.nextInt();
-	        int v=sc.nextInt();
-	        int cnt=(v-b)/(a-b);
-	        System.out.println(cnt);
+	        long a=sc.nextLong();
+	        long b=sc.nextLong();
+	        long v=sc.nextLong();
+          long cur=0;
+          long cnt=1;
+	        while(cur<v){
+              cur+=a;
+              if(cnt>=v){
+                  break;
+              }
+              cur-=b;
+              cnt++;
+          }
+          System.out.println(cnt);
 	        
 	        
 	    }
