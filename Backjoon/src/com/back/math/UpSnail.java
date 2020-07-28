@@ -11,7 +11,7 @@ public class UpSnail {
           long cur=0;
           long cnt=1;
 	        while(cur<v){
-              cur+=a;
+              cur=cnt;
               if(cnt>=v){
                   break;
               }
