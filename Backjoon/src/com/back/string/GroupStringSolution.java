@@ -14,26 +14,27 @@ public class GroupStringSolution {
 			arr[i]=br.readLine();
 		}
 		for(int i=0; i<arr.length; i++) {
-			boolean temp=false;
-			String tmp=arr[i];
-			if(tmp.length()==1) {
-				continue;
-			}
-			for(int j=0; j<arr[i].length(); j++) {
-				for(int z=j+1; z<arr[i].length(); z++) {
-					if(arr[i].charAt(j)==arr[i].charAt(z)) {
-						System.out.println("j: "+arr[i].charAt(j)+ " z:"+arr[i].charAt(z));
-						temp=true;
+			String []idx=arr[i].split("");
+			int cnt=0;
+			while(idx.length>1 && cnt<idx.length-1) {
+				String tmp="";
+				for(int j=cnt+1; j<idx.length; j++) {
+					tmp+=idx[j];
+				}
+//				System.out.println(idx[cnt]);
+				if(tmp.contains(idx[cnt])) {
+					String tmp2=tmp.charAt(0)+"";
+					if(!tmp2.equals(idx[cnt])) {
+						num--;
 						break;
 					}
 				}
+				cnt++;
 			}
-			if(temp) {
-				num--;
-				continue;
-			}
+			
 		}
 		System.out.println(num);
+		
+		
 	}
-
 }
