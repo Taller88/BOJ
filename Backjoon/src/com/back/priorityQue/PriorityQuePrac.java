@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class PriorityQue {
+public class PriorityQuePrac {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
