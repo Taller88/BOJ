@@ -6,7 +6,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class HiddenAndFind {
-	static int[]arr=new int[1000000];
+	static int[]arr=new int[1000001];
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		int su=sc.nextInt();
