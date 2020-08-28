@@ -2,44 +2,29 @@ package com.back.string;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Palendrum {
 
-	public static void main(String[] args) throws Exception{
-		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-		String input=br.readLine();
-		int check=1;
-		if(input.length()==1) {
-			System.out.println(1);
-			return;
-		}
-		if(input.length()%2==0) {
-			String s=input.substring(0, input.length()/2);
-			String rev=input.substring(input.length()/2);
-			int idx=0;
-			for(int i=rev.length()-1; i>=0; i--) {
-				System.out.println(rev.charAt(i)+" "+s.charAt(idx));
-				if(rev.charAt(i)!=s.charAt(idx)) {
-					check=0;
-					break;
-				}
-				idx++;
-			}
-			
-		}else {
-			String s=input.substring(0, input.length()/2);
-			String rev=input.substring(input.length()/2+1);
-			int idx=0;
-			for(int i=rev.length()-1; i>=0; i--) {
-				System.out.println(rev.charAt(i)+" "+s.charAt(idx));
-				if(rev.charAt(i)!=s.charAt(idx)) {
-					check=0;
-					break;
-				}
-				idx++;
-			}
-		}
-		System.out.println(check);
+	public static void main(String[]args){
+	    Scanner sc=new Scanner(System.in);
+	    StringBuilder sb=new StringBuilder();
+	    while(true){
+	        String num=sc.nextLine();
+	        if(num.equals("0")){
+	            break;
+	        }
+	        String tmp="";
+	        for(int i=num.length()-1; i>=0; i--){
+	            tmp+=num.charAt(i);
+	        }
+	        if(tmp.equals(num)){
+	            sb.append("yes\n");
+	        }else{
+	            sb.append("no\n");
+	        }
+	    }
+	    System.out.println(sb.toString().trim());
 	}
 
 }
