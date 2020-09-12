@@ -1,53 +1,50 @@
 package com.back.math2;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class GoldBah {
-	public static boolean primeNum(int n, int b) {
-		if(n==1) {
-			return false;
+
+	public static void main(String[] args) throws Exception{
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		boolean[]isPrime=new boolean[100001];
+		for(int i=2; i<isPrime.length; i++) {
+			isPrime[i]=true;
 		}
-		if(n>10 &&(n%2==0||n%3==0||n%5==0||n%7==0)) {
-			return false;
+		for(int i=2; i<isPrime.length; i++) {
+			for(int j=i*2; j<isPrime.length; j+=i) {
+				if(!isPrime[j]) {
+					continue;
+				}
+				isPrime[j]=false;
+			}
 		}
-		if(b==1){
-			return true;
+		int n=Integer.parseInt(br.readLine());
+		StringBuilder sb=new StringBuilder();
+		for(int z=0; z<n; z++) {
+			int min=Integer.MAX_VALUE;
+			String result="";
+			int num=Integer.parseInt(br.readLine());
+			
+			for(int i=2; i<num; i++) {
+				if(isPrime[i]&& isPrime[num-i]) {
+					if(Math.abs((num-i)-i)<min) {
+						min=Math.abs((num-i)-i);
+						if(i<num-i) {
+							result=i+" "+(num-i);
+						}else {
+							result=(num-i)+" "+i;
+						}
+					}
+				}
+			}
+			sb.append(result+"\n");
+		
 		}
-		if(n%b==0) {
-			return false;
-		}
-		return primeNum(n, b-1);
+		System.out.println(sb.toString().trim());
 	}
-	public static void main(String []args) throws Exception{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
-        int a=Integer.parseInt(br.readLine());
-        for(int i=0; i<a; i++) {
-        	int t=Integer.parseInt(br.readLine());
-        	ArrayList<Integer> list=new ArrayList<>();
-        	for(int j=2; j<t; j++) {
-        		if(primeNum(j, j-1)) {
-            		list.add(j);
-        		}
-        	}
-        	int min=99999;
-        	String result="";
-        	for(int j=0; j<list.size(); j++) {
-        		int tmp=list.get(j);
-        		for(int z=j; z<list.size(); z++) {
-        			int p=list.get(z);
-        			if(tmp+p==t) {
-        					result=tmp+" "+p;
-        			}
-        		}
-        	}
-			bw.write(result+"\n");
-        }
+
 	
-        bw.flush();
-	}
+
 }
