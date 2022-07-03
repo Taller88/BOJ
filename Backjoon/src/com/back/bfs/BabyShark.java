@@ -18,7 +18,6 @@ public class BabyShark {
 		int[][] arr = new int[n][n];
 		int x = 0;
 		int y = 0;
-		int result = 0;
 		for(int i=0; i<n; i++) {
 			st = new StringTokenizer(br.readLine());
 			for(int j=0; j<n; j++) {
@@ -27,20 +26,15 @@ public class BabyShark {
 				if(el==9) {
 					x = i;
 					y=i;
-				}else if(el!=9 && el!=0) {
-					result = el;
 				}
 			}
 			
 		}
 		
-		if(result == 0) {
-			System.out.println(result);
-		}else {
-			int babySharkSize = 2;
-			bfs(arr, x, y, babySharkSize);
-			
-		}
+		
+		int babySharkSize = 2;
+		int result = bfs(arr, x, y, babySharkSize);
+		System.out.println(result);	
 		
 
 	}
@@ -61,16 +55,29 @@ public class BabyShark {
 	static int[] dx = {0,0,-1,1};
 	static int[] dy = {1,-1,0,0};
 	
-	private static void bfs(int[][] arr, int startX, int startY, int babySharkSize) {
+	private static boolean checkArr(int[][]arr) {
+		for(int i = 0; i<arr.length; i++) {
+			for(int j=0; j<arr[0].length; j++) {
+				if(arr[i][j]!=0 && arr[i][j]!=9 ) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	private static int bfs(int[][] arr, int startX, int startY, int babySharkSize) {
 		
 		Queue<Dot> q = new LinkedList<Dot>();
 		q.add(new Dot(startX, startY, babySharkSize));
 		boolean [][]visited = new boolean[arr.length][arr[0].length];
+		arr[startX][startY]=0;
 		visited[startX][startY] = true;
 		
 		while(q.isEmpty()) {
 			Dot d = q.poll();
-			
+			if(checkArr(arr)) {
+				return d.size;
+			}
 			for(int i = 0; i<dx.length; i++) {
 				int x = d.x+dx[i];
 				int y = d.y+dy[i];
@@ -91,6 +98,7 @@ public class BabyShark {
 			
 			
 		}
+		return 0;
 		
 	}
 
