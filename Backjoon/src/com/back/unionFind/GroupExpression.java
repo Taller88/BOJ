@@ -44,13 +44,19 @@ public class GroupExpression {
 		if(b==arr[b]) {
 			return b;
 		}
-		return find(arr[b]);
+		return arr[b]=find(arr[b]);
 	}
 	private static void union(int a, int b) {
 		int parentA = find(a);
 		int parentB = find(b);
 		if(parentA!=parentB) {
-			arr[b] = parentA;
+			if(parentA>parentB) {
+				arr[a] = parentB;
+				
+			}else {
+				arr[b] = parentA;
+				
+			}
 		}
 		
 	}
